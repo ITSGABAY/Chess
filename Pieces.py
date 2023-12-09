@@ -24,27 +24,22 @@ class Pawn(Piece):
     def __init__(self, color, x, y):
         super().__init__(color, "pawn", x, y)
         self.firstMove = True
-
-    def findMoves(self,chessboard):
+        
+    def findMoves(self, chessboard):
         moves = []
-        if self.color == "black": 
-            moves.append((self.x , self.y+1))
-            if self.firstMove is True:
-                moves.append((self.x , self.y+2))   
-            if(chessboard[self.x-1][self.y+1] !=None):
-                moves.append((self.x-1 ,self.y+1))   
-            if(chessboard[self.x+1][self.y+1] !=None):
-                moves.append((self.x+1 ,self.y+1))   
+        direction = 1 if self.color == "black" else -1
+        moves.append((self.x, self.y + direction))
 
-        else:
-            moves.append((self.x , self.y-1))
-            if self.firstMove is True:
-                moves.append((self.x , self.y-2))      
-            if(chessboard[self.x-1][self.y-1] !=None):
-                    moves.append((self.x-1 ,self.y-1))   
-            if(chessboard[self.x+1][self.y-1] !=None):
-                moves.append((self.x+1 ,self.y-1))      
-        pass
+        if self.firstMove:
+            moves.append((self.x, self.y + 2 * direction))
+
+        for i in [-1, 1]:
+            new_x = self.x + i
+            new_y = self.y + direction
+            if 0 <= new_x < 8 and 0 <= new_y < 8 and chessboard[new_x][new_y] is not None:
+                moves.append((new_x, new_y))
+
+        return moves
 
 class Rook(Piece):
     def __init__(self, color, x, y):
