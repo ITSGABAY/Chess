@@ -9,7 +9,7 @@ import sys
 def start_client():
     # Create a socket and connect to the server
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    host = "127.0.0.1"
+    host = "192.168.7.8"
     port = 12345
     print("Client Starting")
     

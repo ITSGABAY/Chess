@@ -13,6 +13,7 @@ class Room:
         self.player2 = player2
         self.sel.register(self.player1, selectors.EVENT_READ, data=self.player1)
         self.sel.register(self.player2, selectors.EVENT_READ, data=self.player2)
+        print("player 2 added")
         self.handle_players()
 
     def handle_players(self):
@@ -35,7 +36,7 @@ class Room:
 
 def start_server():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    host = "127.0.0.1"
+    host = "192.168.7.8"
     port = 12345
 
     server_socket.bind((host, port))
